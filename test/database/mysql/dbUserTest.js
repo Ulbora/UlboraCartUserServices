@@ -51,7 +51,8 @@ describe('mysql DB user', function () {
                 emailAddress: "bob@bob.com",
                 firstName: "bob",
                 lastName: "hope",
-                roleId: roleId
+                roleId: roleId,
+                clientId: "3444"
             };
             setTimeout(function () {
                 db.addUser(json, function (result) {

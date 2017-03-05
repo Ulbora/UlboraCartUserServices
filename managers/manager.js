@@ -19,15 +19,36 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//client   
-exports.USER_INSERT_QUERY = "INSERT INTO user Set ?";
-exports.USER_PASSWORD_UPDATE_QUERY = "UPDATE user SET password = ? " +
-                                     "WHERE username = ? ";
-exports.USER_ENABLE_UPDATE_QUERY = "UPDATE user SET enabled = ? " +
-                                   "WHERE username = ? ";
-exports.USER_INFO_UPDATE_QUERY = "UPDATE user SET first_name = ?, last_name = ?, email_address = ? " +
-                                 "WHERE username = ? ";
-exports.USER_GET_BY_USERNAME_QUERY = "SELECT * FROM user WHERE username = ?";
-exports.USER_DELETE_QUERY = "DELETE FROM user WHERE username = ?";
-exports.USER_LIST_QUERY = "SELECT username, first_name, last_name, enabled FROM user " +
-                          "order by client_id ";
+var crypto = require('crypto');
+
+var db;
+
+exports.init = function (database) {
+    db = database;
+};
+
+
+exports.securityCheck = function (obj) {
+    var returnVal = true;
+    if (obj !== undefined || obj !== null) {
+        var json = JSON.stringify(obj);
+        if (json !== undefined && json !== null) {
+            var n = json.indexOf("function");
+            if (n > -1) {
+                console.log("Security Alert: " + json);
+                returnVal = false;
+            }
+        } else {
+            returnVal = false;
+        }
+    } else {
+        returnVal = false;
+    }
+
+    return returnVal;
+};
+
+
+exports.hashPassword = function (username, pw, callback) {
+    crypto.pbkdf2(pw, username, 250, 128, callback);
+};

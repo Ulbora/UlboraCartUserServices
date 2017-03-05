@@ -34,7 +34,8 @@ exports.addUser = function (con, json, callback) {
         email_address: json.emailAddress,
         first_name: json.firstName,
         last_name: json.lastName,
-        role_id: json.roleId
+        role_id: json.roleId,
+        client_id: json.clientId
     };
     crud.insertNoId(con, userQueries.USER_INSERT_QUERY, args, function (result) {
         var rtn = {
@@ -84,7 +85,8 @@ exports.getUser = function (username, callback) {
                 emailAddress: result.data[0].email_address,
                 firstName: result.data[0].first_name,
                 lastName: result.data[0].last_name,
-                roleId: result.data[0].role_id
+                roleId: result.data[0].role_id,
+                clientId: result.data[0].client_id
             };
             callback(rtn);
         } else {

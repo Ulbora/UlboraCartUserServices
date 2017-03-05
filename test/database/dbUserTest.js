@@ -46,7 +46,8 @@ describe('DB user', function () {
                 emailAddress: "bob@bob.com",
                 firstName: "bob",
                 lastName: "hope",
-                roleId: roleId
+                roleId: roleId,
+                clientId: "5544"
             };
             setTimeout(function () {
                 db.addUser(json, function (result) {
@@ -186,9 +187,6 @@ describe('DB user', function () {
             }, 1000);
         });
     });
-
-    
-    
     
 });
 

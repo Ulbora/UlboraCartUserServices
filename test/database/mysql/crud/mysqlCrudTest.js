@@ -51,7 +51,8 @@ describe('MYSQLCrud', function () {
                 email_address: 'ulbora@ulbora.com',
                 first_name: "john",
                 last_name: "watson",
-                role_id: roleId
+                role_id: roleId,
+                client_id: "5444"
             };
             setTimeout(function () {
                 db.insertNoId(null, q, args, function (result) {
