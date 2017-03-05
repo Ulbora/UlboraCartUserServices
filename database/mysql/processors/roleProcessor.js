@@ -40,8 +40,8 @@ exports.addRole = function (con, json, callback) {
 };
 
 
-exports.getRole = function (clientId, callback) {
-    var queryId = [clientId];
+exports.getRole = function (id, callback) {
+    var queryId = [id];
     crud.get(roleQueries.ROLE_GET_BY_ID_QUERY, queryId, function (result) {
         if (result.success && result.data.length > 0) {
             var rtn = {
