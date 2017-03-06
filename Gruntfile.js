@@ -63,11 +63,12 @@ module.exports = function (grunt) {
                 //src: ['test/database/dbUserTest.js']
                 //src: ['test/database/mysql/dbUserTest.js']
                 //src: ['test/database/mysql/processors/roleProcessorTest.js']
-                src: ['test/managers/userManagerTest.js']
+                //src: ['test/managers/userManagerTest.js']
                 //src: ['test/managers/clientRedirectUriManagerTest.js']
                 //src: ['test/delegates/credentialsGrantDelegateTest.js']
                 //src: ['test/services/clientRoleUriServiceTest.js']
                 //src: ['test/oauth2/oauth2Test.js']
+                src: ['test/proxies/tokenValidationProxyTest.js']
             }
         }
     });
