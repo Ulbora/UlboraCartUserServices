@@ -20,7 +20,7 @@ describe('tokenValidationProxy', function () {
             setTimeout(function () {
                 tokenValidationProxy.validateAccessToken(json, function (result) {
                     console.log('validateAccessToken: ', JSON.stringify(result));
-                    if (!result.success) {
+                    if (!result.valid) {
                         assert(true);
                     } else {
                         assert(false);

@@ -19,15 +19,8 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//var tokenValidationManager = require("../managers/tokenValidationManager");
 var service = require("../services/service");
-
-//var db;
-
-//exports.init = function (database) {
-    ///db = database;
-    //tokenValidationManager.init(db);
-//};
+var tokenValidationProxy = require("../proxies/tokenValidationProxy");
 
 exports.authorize = function (req, res, me, callback) {
     var tokenHeader = req.header("Authorization");
@@ -53,7 +46,7 @@ exports.authorize = function (req, res, me, callback) {
                 uri: uri,
                 scope: scope
             };
-            tokenValidationManager.validateAccessToken(authJson, function (result) {
+            tokenValidationProxy.validateAccessToken(authJson, function (result) {
                 if (result.valid) {
                     callback();
                 } else {

@@ -3,7 +3,7 @@ var request = require('request');
 
 exports.validateAccessToken = function (authJson, callback) {
     var rtn = {
-        success: false,
+        valid: false,
         message: ""
     };
     var url = process.env.OAUTH2_VALIDATION_URI || constants.OAUTH2_VALIDATION_URI;
@@ -20,7 +20,7 @@ exports.validateAccessToken = function (authJson, callback) {
                 console.log('body: ', body);
                 console.log('body.valid: ', body.valid);
                 if(body.valid){
-                    rtn.success = true;
+                    rtn.valid = true;
                 }                
                 callback(rtn);
             }else{
