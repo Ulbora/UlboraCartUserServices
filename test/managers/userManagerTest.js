@@ -179,7 +179,43 @@ describe('User Manager', function () {
     
     
     describe('#validateUser()', function () {
-        it('should validate user in manager', function (done) {
+        it('should fail to validate a disabled user in manager', function (done) {
+            setTimeout(function () {
+                userManager.validateUser(userId, "tester22", function (result) {
+                    if (result && result.valid === true) {
+                        assert(false);
+                    } else {
+                        assert(true);
+                    }
+                    done();
+                });
+            }, 1000);
+        });
+    });
+    
+    
+    describe('#updateUserEnabled()', function () {
+        it('should disable a user in manager', function (done) {
+            var json = {
+                enabled: true,
+                username: userId
+            };
+            setTimeout(function () {
+                userManager.updateUserEnabled(json, function (result) {
+                    if (result.success) {
+                        assert(true);
+                    } else {
+                        assert(false);
+                    }
+                    done();
+                });
+            }, 1000);
+        });
+    });
+    
+    
+    describe('#validateUser()', function () {
+        it('should validate a  user in manager', function (done) {
             setTimeout(function () {
                 userManager.validateUser(userId, "tester22", function (result) {
                     if (result && result.valid === true) {
@@ -192,7 +228,6 @@ describe('User Manager', function () {
             }, 1000);
         });
     });
-    
     
     
     describe('#getUserList()', function () {

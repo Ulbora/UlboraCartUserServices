@@ -43,6 +43,7 @@ exports.addUser = function (json, callback) {
                     db.addUser(json, function (result) {
                         if (result && result.success) {
                             returnVal.success = result.success;
+                            returnVal.username = json.username;
                             callback(returnVal);
                         } else {
                             callback(returnVal);
@@ -193,7 +194,7 @@ exports.validateUser = function (username, password, callback) {
                             var encpw = key.toString('base64');
                             console.log("pw to validate: " + encpw);
                             console.log("pw for user: " + result.password);
-                            if(encpw === result.password){
+                            if(encpw === result.password && result.enabled){
                                 rtn.valid = true;
                             }
                             callback(rtn);
