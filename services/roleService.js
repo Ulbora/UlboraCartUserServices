@@ -50,18 +50,18 @@ exports.add = function (req, res) {
     }
 };
 
-/*
+
 exports.get = function (req, res) {
     console.log("in auth callback");
     var me = {
         role: "admin",
-        uri: "/rs/client/get",
+        uri: "/rs/role/get",
         scope: "read"
     };
     oauth2.authorize(req, res, me, function () {
         var id = req.params.id;
         if (id !== null && id !== undefined) {
-            clientManager.getClient(id, function (result) {
+            roleManager.getRole(id, function (result) {
                 res.send(result);
             });
         } else {
@@ -73,17 +73,17 @@ exports.get = function (req, res) {
 exports.list = function (req, res) {
     var me = {
         role: "admin",
-        uri: "/rs/client/list",
+        uri: "/rs/role/list",
         scope: "read"
     };
     oauth2.authorize(req, res, me, function () {
         console.log("in auth callback");
-        clientManager.getClientList(function (result) {
+        roleManager.getRoleList(function (result) {
             res.send(result);
         });
     });
 };
-*/
+
 exports.delete = function (req, res) {
     console.log("in auth callback");
     var me = {
