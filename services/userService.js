@@ -123,7 +123,7 @@ exports.delete = function (req, res) {
         scope: "write"
     };
     oauth2.authorize(req, res, me, function () {
-        var id = req.params.id;
+        var id = req.params.username;
         if (id !== null && id !== undefined) {
             userManager.deleteUser(id, function (result) {
                 res.send(result);

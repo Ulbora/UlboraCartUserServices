@@ -40,12 +40,12 @@ describe('User Manager', function () {
      
     describe('#addUser()', function () {
         it('should add a user in manager', function (done) {
-            var d = new Date();
+            //var d = new Date();
             var json = {
                 username: "tester123455677",
                 password: "tester",
                 enabled: true,
-                dateEntered: d,
+                //dateEntered: d,
                 emailAddress: "bob@bob.com",
                 firstName: "bob",
                 lastName: "hope",

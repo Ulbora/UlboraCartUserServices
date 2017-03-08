@@ -76,7 +76,7 @@ describe('userService', function () {
     describe('#addUser()', function () {
         it('should add a user', function (done) {
             setTimeout(function () {
-                var d = new Date();
+                //var d = new Date();
                 var req = {};
                 var header = function (val) {
                     if (val === "Authorization") {
@@ -94,7 +94,7 @@ describe('userService', function () {
                     username: "tester123455677ff",
                     password: "tester",
                     enabled: true,
-                    dateEntered: d,
+                    //dateEntered: d,
                     emailAddress: "bob@bob.com",
                     firstName: "bob",
                     lastName: "hope",
@@ -460,7 +460,7 @@ describe('userService', function () {
                 req.protocol = "https";
                 req.hostname = "abc.com";
                 req.params = {};
-                req.params.id = userId;
+                req.params.username = userId;
                 var res = {};
                 res.statusCode;
                 res.status = function (val) {

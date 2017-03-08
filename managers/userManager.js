@@ -40,6 +40,8 @@ exports.addUser = function (json, callback) {
                 if (!err && key) {
                     console.log("password hash : " + key.toString('base64'));
                     json.password = key.toString('base64');
+                    var d = new Date();
+                    json.dateEntered = d;
                     db.addUser(json, function (result) {
                         if (result && result.success) {
                             returnVal.success = result.success;
