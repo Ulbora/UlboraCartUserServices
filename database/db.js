@@ -22,7 +22,12 @@
 var db = require("./mysql/db");
 
 exports.connectDb = function (conf) {
-    var host = process.env.DATABASE_HOST || conf.DATABASE_HOST;
+    var host;
+    if(process.env.MYSQL_PORT_3306_TCP_ADDR){
+        host = process.env.MYSQL_PORT_3306_TCP_ADDR;
+    }else{
+        host = process.env.DATABASE_HOST || conf.DATABASE_HOST;
+    }            
     var user = process.env.DATABASE_USER_NAME || conf.DATABASE_USER_NAME;
     var pw = process.env.DATABASE_USER_PASSWORD || conf.DATABASE_USER_PASSWORD;
     var database = process.env.DATABASE_NAME || conf.DATABASE_NAME;
