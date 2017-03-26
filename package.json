@@ -8,7 +8,12 @@
     "client",
     "browser"
   ],
-  "author": "ken",
+  "author": "ken williamson",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ulbora/UlboraUserService.git"
+  },
+  "license": "AGPL",
   "contributors": [],
   "dependencies": {
     "body-parser": "~1.13.2",
