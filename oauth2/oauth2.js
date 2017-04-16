@@ -27,15 +27,16 @@ exports.authorize = function (req, res, me, callback) {
     var userId = req.header("userId");
     var clientIdStr = req.header("clientId");
     var clientId = service.getClientId(clientIdStr);
-    var prot = req.protocol;
-    var host = req.hostname;
+    //var prot = req.protocol;
+    //var host = req.hostname;
     //console.log("token:" + token);
     if (tokenHeader !== undefined && tokenHeader !== null) {
         var tokenArray = tokenHeader.split(' ');
         if (tokenArray !== undefined && tokenArray !== null && tokenArray.length === 2) {
             var token = tokenArray[1];            
             var role = me.role;
-            var uri = prot + "://" + host + me.uri;
+            //var uri = prot + "://" + host + me.uri;
+            var uri = me.uri;
             console.log("uri: " + uri);
             var scope = me.scope;
             var authJson = {
