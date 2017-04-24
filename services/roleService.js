@@ -20,7 +20,9 @@
  */
 
 var roleManager = require("../managers/roleManager");
-var oauth2 = require("../oauth2/oauth2");
+var constants = require("../constants/constants");
+var oauth2 = require("ulbora-oauth2");
+var validationUrl = process.env.OAUTH2_VALIDATION_URI || constants.OAUTH2_VALIDATION_URI;
 
 var db;
 
@@ -36,7 +38,7 @@ exports.add = function (req, res) {
             uri: "/rs/role/add",
             scope: "write"
         };
-        oauth2.authorize(req, res, me, function () {
+        oauth2.authorize(req, res, me, validationUrl, function () {
             var reqBody = req.body;
             var bodyJson = JSON.stringify(reqBody);
             console.log("body: " + bodyJson);
@@ -58,7 +60,7 @@ exports.get = function (req, res) {
         uri: "/rs/role/get",
         scope: "read"
     };
-    oauth2.authorize(req, res, me, function () {
+    oauth2.authorize(req, res, me, validationUrl, function () {
         var id = req.params.id;
         if (id !== null && id !== undefined) {
             roleManager.getRole(id, function (result) {
@@ -76,7 +78,7 @@ exports.list = function (req, res) {
         uri: "/rs/role/list",
         scope: "read"
     };
-    oauth2.authorize(req, res, me, function () {
+    oauth2.authorize(req, res, me, validationUrl, function () {
         console.log("in auth callback");
         roleManager.getRoleList(function (result) {
             res.send(result);
@@ -91,7 +93,7 @@ exports.delete = function (req, res) {
         uri: "/rs/role/delete",
         scope: "write"
     };
-    oauth2.authorize(req, res, me, function () {
+    oauth2.authorize(req, res, me, validationUrl, function () {
         var id = req.params.id;
         if (id !== null && id !== undefined) {
             roleManager.deleteRole(id, function (result) {

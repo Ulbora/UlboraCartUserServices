@@ -20,7 +20,9 @@
  */
 
 var userManager = require("../managers/userManager");
-var oauth2 = require("../oauth2/oauth2");
+var constants = require("../constants/constants");
+var oauth2 = require("ulbora-oauth2");
+var validationUrl = process.env.OAUTH2_VALIDATION_URI || constants.OAUTH2_VALIDATION_URI;
 
 var db;
 
@@ -36,7 +38,7 @@ exports.add = function (req, res) {
             uri: "/rs/user/add",
             scope: "write"
         };
-        oauth2.authorize(req, res, me, function () {
+        oauth2.authorize(req, res, me, validationUrl, function () {
             var reqBody = req.body;
             var bodyJson = JSON.stringify(reqBody);
             console.log("body: " + bodyJson);
@@ -57,7 +59,7 @@ exports.update = function (req, res) {
             uri: "/rs/user/update",
             scope: "write"
         };
-        oauth2.authorize(req, res, me, function () {
+        oauth2.authorize(req, res, me, validationUrl, function () {
             var reqBody = req.body;
             var bodyJson = JSON.stringify(reqBody);
             console.log("body: " + bodyJson);
@@ -89,7 +91,7 @@ exports.get = function (req, res) {
         uri: "/rs/user/get",
         scope: "read"
     };
-    oauth2.authorize(req, res, me, function () {
+    oauth2.authorize(req, res, me, validationUrl, function () {
         var id = req.params.username;
         if (id !== null && id !== undefined) {
             userManager.getUser(id, function (result) {
@@ -107,7 +109,7 @@ exports.list = function (req, res) {
         uri: "/rs/user/list",
         scope: "read"
     };
-    oauth2.authorize(req, res, me, function () {
+    oauth2.authorize(req, res, me, validationUrl, function () {
         console.log("in auth callback");
         userManager.getUserList(function (result) {
             res.send(result);
@@ -122,7 +124,7 @@ exports.delete = function (req, res) {
         uri: "/rs/user/delete",
         scope: "write"
     };
-    oauth2.authorize(req, res, me, function () {
+    oauth2.authorize(req, res, me, validationUrl, function () {
         var id = req.params.username;
         if (id !== null && id !== undefined) {
             userManager.deleteUser(id, function (result) {
