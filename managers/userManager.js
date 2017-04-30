@@ -198,6 +198,7 @@ exports.validateUser = function (username, password, callback) {
                             console.log("pw for user: " + result.password);
                             if(encpw === result.password && result.enabled){
                                 rtn.valid = true;
+                                rtn.code = result.clientId;
                             }
                             callback(rtn);
                         } else {
