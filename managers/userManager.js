@@ -145,10 +145,10 @@ exports.updateUserInfo = function (json, callback) {
     }
 };
 
-exports.getUser = function (username, callback) {
+exports.getUser = function (username, clientId, callback) {
     var isOk = manager.securityCheck(username);
     if (isOk) {
-        db.getUser(username, function (result) {
+        db.getUser(username, clientId, function (result) {
             if (result) {
                 delete result.password;
                 callback(result);
@@ -165,14 +165,14 @@ exports.getUserList = function (callback) {
     db.getUserList(callback);
 };
 
-exports.deleteUser = function (username, callback) {
+exports.deleteUser = function (username, clientId, callback) {
     var returnVal = {
         success: false,
         message: ""
     };
     var isOk = manager.securityCheck(username);
     if (isOk) {
-        db.deleteUser(username, callback);
+        db.deleteUser(username, clientId, callback);
     } else {
         callback(returnVal);
     }
@@ -180,7 +180,7 @@ exports.deleteUser = function (username, callback) {
 
 
 
-exports.validateUser = function (username, password, callback) {
+exports.validateUser = function (username, password, clientId, callback) {
     var rtn = {
         valid: false
     };
@@ -188,7 +188,7 @@ exports.validateUser = function (username, password, callback) {
     var isOk2 = manager.securityCheck(password);
     if (isOk && isOk2) {
         if (username && password) {
-            db.getUser(username, function (result) {
+            db.getUser(username, clientId, function (result) {
                 console.log("user to validate: " + JSON.stringify(result));
                 if (result) {
                     manager.hashPassword(username, password, function (err, key) {

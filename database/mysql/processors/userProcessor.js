@@ -49,7 +49,8 @@ exports.addUser = function (con, json, callback) {
 exports.updateUserPassword = function (con, json, callback) {
     var args = [
         json.password,
-        json.username
+        json.username,
+        json.clientId
     ];
     crud.update(con, userQueries.USER_PASSWORD_UPDATE_QUERY, args, callback);
 };
@@ -57,7 +58,8 @@ exports.updateUserPassword = function (con, json, callback) {
 exports.updateUserEnabled = function (con, json, callback) {
     var args = [
         json.enabled,
-        json.username
+        json.username,
+        json.clientId
     ];
     crud.update(con, userQueries.USER_ENABLE_UPDATE_QUERY, args, callback);
 };
@@ -67,14 +69,15 @@ exports.updateUserInfo = function (con, json, callback) {
         json.firstName,
         json.lastName,
         json.emailAddress,
-        json.username
+        json.username,
+        json.clientId
     ];
     crud.update(con, userQueries.USER_INFO_UPDATE_QUERY, args, callback);
 };
 
 
-exports.getUser = function (username, callback) {
-    var queryId = [username];
+exports.getUser = function (username, clientId, callback) {
+    var queryId = [username, clientId];
     crud.get(userQueries.USER_GET_BY_USERNAME_QUERY, queryId, function (result) {
         if (result.success && result.data.length > 0) {
             var rtn = {
@@ -102,6 +105,7 @@ exports.getUserList = function (callback) {
             for (var cnt = 0; cnt < result.data.length; cnt++) {
                 var rtn = {
                     username: result.data[cnt].username,
+                    clientId: result.data[cnt].client_id,
                     firstName: result.data[cnt].first_name,
                     lastName: result.data[cnt].last_name,
                     enabled: (result.data[0].enabled === 1) ? true : false
@@ -116,7 +120,7 @@ exports.getUserList = function (callback) {
     });
 };
 
-exports.deleteUser = function (con, userId, callback) {
-    var queryId = [userId];
+exports.deleteUser = function (con, userId, clientId, callback) {
+    var queryId = [userId, clientId];
     crud.delete(con, userQueries.USER_DELETE_QUERY, queryId, callback);
 };

@@ -2,7 +2,7 @@ var assert = require('assert');
 var db = require("../../database/db");
 var roleId;
 var userId;
-
+var clientId = "5544";
 describe('DB user', function () {
     this.timeout(20000);
     describe('#connect()', function () {
@@ -47,7 +47,7 @@ describe('DB user', function () {
                 firstName: "bob",
                 lastName: "hope",
                 roleId: roleId,
-                clientId: "5544"
+                clientId: clientId
             };
             setTimeout(function () {
                 db.addUser(json, function (result) {
@@ -68,7 +68,8 @@ describe('DB user', function () {
 
             var json = {
                 password: 'newpassword',
-                username: userId
+                username: userId,
+                clientId: clientId
             };
             setTimeout(function () {
                 db.updateUserPassword(json, function (result) {
@@ -88,7 +89,8 @@ describe('DB user', function () {
 
             var json = {
                 enabled: false,
-                username: userId
+                username: userId,
+                clientId: clientId
             };
             setTimeout(function () {
                 db.updateUserEnabled(json, function (result) {
@@ -110,7 +112,8 @@ describe('DB user', function () {
                 firstName: "robert",
                 lastName: "sims",
                 emailAddress: "sims@sims.com",
-                username: userId
+                username: userId,
+                clientId: clientId
             };
             setTimeout(function () {
                 db.updateUserInfo(json, function (result) {
@@ -129,7 +132,7 @@ describe('DB user', function () {
     describe('#getUser()', function () {
         it('should get user in processor', function (done) {
             setTimeout(function () {
-                db.getUser(userId, function (result) {
+                db.getUser(userId, clientId, function (result) {
                     if (result && result.lastName === "sims" && result.enabled === false) {
                         assert(true);
                     } else {
@@ -161,7 +164,7 @@ describe('DB user', function () {
     describe('#deleteUser()', function () {
         it('should delete client', function (done) {
             setTimeout(function () {
-                db.deleteUser(userId, function (result) {
+                db.deleteUser(userId, clientId, function (result) {
                     if (result.success) {
                         assert(true);
                     } else {

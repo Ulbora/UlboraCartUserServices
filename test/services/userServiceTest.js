@@ -7,7 +7,7 @@ var tokenFile = require("./token");
 var token = tokenFile.token;
 var roleId;
 var userId;
-
+var clientId = "6454"
 describe('userService', function () {
     this.timeout(20000);
     describe('#init()', function () {
@@ -99,7 +99,7 @@ describe('userService', function () {
                     firstName: "bob",
                     lastName: "hope",
                     roleId: roleId,
-                    clientId: "4454"
+                    clientId: clientId
                 };
                 req.is = function (val) {
                     if (val === 'application/json') {
@@ -150,7 +150,8 @@ describe('userService', function () {
                 req.hostname = "abc.com";
                 req.body = {
                     username: "tester123455677ff",
-                    password: "tester2"
+                    password: "tester2",
+                    clientId: clientId
                 };
                 req.is = function (val) {
                     if (val === 'application/json') {
@@ -190,7 +191,8 @@ describe('userService', function () {
 
                 req.body = {
                     username: "tester123455677ff",
-                    password: "tester2"
+                    password: "tester2",
+                    clientId: clientId
                 };
                 req.is = function (val) {
                     if (val === 'application/json') {
@@ -241,6 +243,7 @@ describe('userService', function () {
                 req.body = {
                     username: "tester123455677ff",
                     enabled: false,
+                    clientId: clientId
                 };
                 req.is = function (val) {
                     if (val === 'application/json') {
@@ -281,7 +284,8 @@ describe('userService', function () {
 
                 req.body = {
                     username: "tester123455677ff",
-                    password: "tester2"
+                    password: "tester2",
+                    clientId: clientId
                 };
                 req.is = function (val) {
                     if (val === 'application/json') {
@@ -333,7 +337,8 @@ describe('userService', function () {
                     username: "tester123455677ff",
                     firstName: "robert",
                     lastName: "johnson",
-                    emailAddress: "sims@sims.com"
+                    emailAddress: "sims@sims.com",
+                    clientId: clientId
                 };
                 req.is = function (val) {
                     if (val === 'application/json') {
@@ -383,6 +388,7 @@ describe('userService', function () {
                 req.hostname = "abc.com";
                 req.params = {};
                 req.params.username = userId;
+                req.params.clientId = clientId;
                 var res = {};
                 res.statusCode;
                 res.status = function (val) {
@@ -461,6 +467,7 @@ describe('userService', function () {
                 req.hostname = "abc.com";
                 req.params = {};
                 req.params.username = userId;
+                req.params.clientId = clientId;
                 var res = {};
                 res.statusCode;
                 res.status = function (val) {

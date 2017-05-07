@@ -3,6 +3,7 @@ var crud = require("../../../../database/mysql/crud/mysqlCrud");
 var userProcessor = require("../../../../database/mysql/processors/userProcessor");
 var userId;
 var roleId;
+var clientId = "2442";
 describe('UserProcessor', function () {
     this.timeout(6000);
     describe('#connect()', function () {
@@ -55,7 +56,7 @@ describe('UserProcessor', function () {
                 firstName: "bob",
                 lastName: "hope",
                 roleId: roleId,
-                clientId: "244"
+                clientId: clientId
             };
             setTimeout(function () {
                 userProcessor.addUser(null, json, function (result) {
@@ -76,7 +77,8 @@ describe('UserProcessor', function () {
 
             var json = {
                 password: 'newpassword',
-                username: userId
+                username: userId,
+                clientId: clientId
             };
             setTimeout(function () {
                 userProcessor.updateUserPassword(null, json, function (result) {
@@ -96,7 +98,8 @@ describe('UserProcessor', function () {
 
             var json = {
                 enabled: false,
-                username: userId
+                username: userId,
+                clientId: clientId
             };
             setTimeout(function () {
                 userProcessor.updateUserEnabled(null, json, function (result) {
@@ -118,7 +121,8 @@ describe('UserProcessor', function () {
                 firstName: "robert",
                 lastName: "sims",
                 emailAddress: "sims@sims.com",
-                username: userId
+                username: userId,
+                clientId: clientId
             };
             setTimeout(function () {
                 userProcessor.updateUserInfo(null, json, function (result) {
@@ -137,7 +141,7 @@ describe('UserProcessor', function () {
     describe('#getUser()', function () {
         it('should get user in processor', function (done) {
             setTimeout(function () {
-                userProcessor.getUser(userId, function (result) {
+                userProcessor.getUser(userId, clientId, function (result) {
                     if (result && result.lastName === "sims" && result.enabled === false) {
                         assert(true);
                     } else {
@@ -169,7 +173,7 @@ describe('UserProcessor', function () {
     describe('#deleteUser()', function () {
         it('should delete client', function (done) {
             setTimeout(function () {
-                userProcessor.deleteUser(null, userId, function (result) {
+                userProcessor.deleteUser(null, userId, clientId, function (result) {
                     if (result.success) {
                         assert(true);
                     } else {

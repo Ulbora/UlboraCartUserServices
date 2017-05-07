@@ -3,6 +3,7 @@ var db = require("../../database/db");
 var roleManager = require("../../managers/roleManager");
 var userManager = require("../../managers/userManager");
 var roleId;
+var clientId = "4454";
 describe('User Manager', function () {
     this.timeout(20000);
     describe('#init()', function () {
@@ -50,7 +51,7 @@ describe('User Manager', function () {
                 firstName: "bob",
                 lastName: "hope",
                 roleId: roleId,
-                clientId: "4454"
+                clientId: clientId
             };
             setTimeout(function () {
                 userManager.addUser(json, function (result) {
@@ -80,7 +81,7 @@ describe('User Manager', function () {
                 firstName: "bob",
                 lastName: "hope",
                 roleId: roleId,
-                clientId: "4454"
+                clientId: clientId
             };
             setTimeout(function () {
                 userManager.addUser(json, function (result) {
@@ -101,7 +102,8 @@ describe('User Manager', function () {
             var d = new Date();
             var json = {
                 username: "tester123455677",
-                password: "tester22"
+                password: "tester22",
+                clientId: clientId
                 
             };
             setTimeout(function () {
@@ -122,7 +124,8 @@ describe('User Manager', function () {
         it('should disable a user in manager', function (done) {
             var json = {
                 enabled: false,
-                username: userId
+                username: userId,
+                clientId: clientId
             };
             setTimeout(function () {
                 userManager.updateUserEnabled(json, function (result) {
@@ -145,7 +148,8 @@ describe('User Manager', function () {
                 firstName: "robert",
                 lastName: "sims",
                 emailAddress: "sims@sims.com",
-                username: userId
+                username: userId,
+                clientId: clientId
             };
             setTimeout(function () {
                 userManager.updateUserInfo(json, function (result) {
@@ -164,7 +168,7 @@ describe('User Manager', function () {
     describe('#getUser()', function () {
         it('should get user in manager', function (done) {
             setTimeout(function () {
-                userManager.getUser(userId, function (result) {
+                userManager.getUser(userId, clientId, function (result) {
                     console.log("user to found: " + JSON.stringify(result));
                     if (result && result.lastName === "sims" && result.enabled === false && result.password === undefined) {
                         assert(true);
@@ -181,7 +185,7 @@ describe('User Manager', function () {
     describe('#validateUser()', function () {
         it('should fail to validate a disabled user in manager', function (done) {
             setTimeout(function () {
-                userManager.validateUser(userId, "tester22", function (result) {
+                userManager.validateUser(userId, "tester22", clientId, function (result) {
                     if (result && result.valid === true) {
                         assert(false);
                     } else {
@@ -198,7 +202,8 @@ describe('User Manager', function () {
         it('should disable a user in manager', function (done) {
             var json = {
                 enabled: true,
-                username: userId
+                username: userId,
+                clientId: clientId
             };
             setTimeout(function () {
                 userManager.updateUserEnabled(json, function (result) {
@@ -217,7 +222,7 @@ describe('User Manager', function () {
     describe('#validateUser()', function () {
         it('should validate a  user in manager', function (done) {
             setTimeout(function () {
-                userManager.validateUser(userId, "tester22", function (result) {
+                userManager.validateUser(userId, "tester22", clientId, function (result) {
                     if (result && result.valid === true) {
                         assert(true);
                     } else {
@@ -249,7 +254,7 @@ describe('User Manager', function () {
     describe('#deleteUser()', function () {
         it('should delete user in manager', function (done) {
             setTimeout(function () {
-                userManager.deleteUser(userId, function (result) {
+                userManager.deleteUser(userId, clientId, function (result) {
                     if (result.success) {
                         assert(true);
                     } else {

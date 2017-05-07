@@ -38,8 +38,8 @@ exports.init = function(app, db){
     //user services
     app.post('/rs/user/add', userService.add);      
     app.put('/rs/user/update', userService.update);
-    app.get('/rs/user/get/:username', userService.get);
-    app.delete('/rs/user/delete/:username', userService.delete);
+    app.get('/rs/user/get/:username/:clientId', userService.get);
+    app.delete('/rs/user/delete/:username/:clientId', userService.delete);
     app.get('/rs/user/list', userService.list);  
     app.post('/rs/user/login', userService.login);   
         

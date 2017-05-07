@@ -77,16 +77,16 @@ exports.updateUserInfo = function (json, callback) {
 };
 
 
-exports.getUser = function (username, callback) {
-    db.getUser(username, callback);
+exports.getUser = function (username, clientId, callback) {
+    db.getUser(username, clientId, callback);
 };
 
 exports.getUserList = function (callback) {
     db.getUserList(callback);
 };
 
-exports.deleteUser = function (username, callback) {
-    db.deleteUser(username, callback);
+exports.deleteUser = function (username, clientId, callback) {
+    db.deleteUser(username, clientId, callback);
 };
 
 //end user

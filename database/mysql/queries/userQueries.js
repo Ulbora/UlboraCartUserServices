@@ -22,12 +22,13 @@
 //client   
 exports.USER_INSERT_QUERY = "INSERT INTO user Set ?";
 exports.USER_PASSWORD_UPDATE_QUERY = "UPDATE user SET password = ? " +
-                                     "WHERE username = ? ";
+                                     "WHERE username = ? and client_id = ? ";
 exports.USER_ENABLE_UPDATE_QUERY = "UPDATE user SET enabled = ? " +
-                                   "WHERE username = ? ";
+                                   "WHERE username = ? and client_id = ? ";
 exports.USER_INFO_UPDATE_QUERY = "UPDATE user SET first_name = ?, last_name = ?, email_address = ? " +
-                                 "WHERE username = ? ";
-exports.USER_GET_BY_USERNAME_QUERY = "SELECT * FROM user WHERE username = ?";
-exports.USER_DELETE_QUERY = "DELETE FROM user WHERE username = ?";
-exports.USER_LIST_QUERY = "SELECT username, first_name, last_name, enabled FROM user " +
+                                 "WHERE username = ? and client_id = ? ";
+exports.USER_GET_BY_USERNAME_QUERY = "SELECT * FROM user WHERE username = ? and client_id = ? ";
+exports.USER_DELETE_QUERY = "DELETE FROM user WHERE username = ? and client_id = ? ";
+exports.USER_LIST_QUERY = "SELECT username, first_name, last_name, enabled, client_id " +
+                          "FROM user " +
                           "order by client_id ";

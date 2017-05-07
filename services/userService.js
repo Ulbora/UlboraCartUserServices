@@ -93,8 +93,9 @@ exports.get = function (req, res) {
     };
     oauth2.authorize(req, res, me, validationUrl, function () {
         var id = req.params.username;
-        if (id !== null && id !== undefined) {
-            userManager.getUser(id, function (result) {
+        var clientId = req.params.clientId;
+        if (id !== null && id !== undefined && clientId !== null && clientId !== undefined) {
+            userManager.getUser(id, clientId, function (result) {
                 res.send(result);
             });
         } else {
@@ -126,8 +127,9 @@ exports.delete = function (req, res) {
     };
     oauth2.authorize(req, res, me, validationUrl, function () {
         var id = req.params.username;
-        if (id !== null && id !== undefined) {
-            userManager.deleteUser(id, function (result) {
+        var clientId = req.params.clientId;
+        if (id !== null && id !== undefined && clientId !== null && clientId !== undefined) {
+            userManager.deleteUser(id, clientId, function (result) {
                 res.send(result);
             });
         } else {
@@ -142,8 +144,8 @@ exports.login = function (req, res) {
         var reqBody = req.body;
         var bodyJson = JSON.stringify(reqBody);
         console.log("body: " + bodyJson);
-        if (reqBody.username && reqBody.password) {
-            userManager.validateUser(reqBody.username, reqBody.password, function (result) {
+        if (reqBody.username && reqBody.password && reqBody.clientId) {
+            userManager.validateUser(reqBody.username, reqBody.password, reqBody.clientId, function (result) {
                 res.send(result);
             });
         } else {
