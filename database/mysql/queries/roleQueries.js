@@ -21,6 +21,9 @@
 
 //client   
 exports.ROLE_INSERT_QUERY = "INSERT INTO role Set ?";
+
 exports.ROLE_GET_BY_ID_QUERY = "SELECT * FROM role WHERE id = ?";
+
 exports.ROLE_DELETE_QUERY = "DELETE FROM role WHERE id = ?";
+
 exports.ROLE_LIST_QUERY = "SELECT * FROM role";
