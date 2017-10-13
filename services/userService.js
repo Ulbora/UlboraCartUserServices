@@ -118,6 +118,27 @@ exports.list = function (req, res) {
     });
 };
 
+
+exports.search = function (req, res) {
+    console.log("in auth callback");
+    var me = {
+        role: "admin",
+        uri: "/rs/user/search",
+        scope: "read"
+    };
+    oauth2.authorize(req, res, me, validationUrl, function () {       
+        var clientId = req.params.clientId;
+        if (clientId !== null && clientId !== undefined) {
+            userManager.searchUserList(clientId, function (result) {
+                res.send(result);
+            });
+        } else {
+            res.send([]);
+        }
+    });
+};
+
+
 exports.delete = function (req, res) {
     console.log("in auth callback");
     var me = {

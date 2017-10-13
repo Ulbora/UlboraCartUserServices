@@ -85,6 +85,11 @@ exports.getUserList = function (callback) {
     db.getUserList(callback);
 };
 
+
+exports.searchUserList = function (clientId, callback) {
+    db.searchUserList(clientId, callback);
+};
+
 exports.deleteUser = function (username, clientId, callback) {
     db.deleteUser(username, clientId, callback);
 };

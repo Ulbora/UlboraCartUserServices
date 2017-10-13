@@ -165,6 +165,22 @@ exports.getUserList = function (callback) {
     db.getUserList(callback);
 };
 
+
+exports.searchUserList = function (clientId, callback) {
+    var isOk = manager.securityCheck(clientId);
+    if (isOk) {
+        db.searchUserList(clientId, function (result) {
+            if (result) {               
+                callback(result);
+            } else {
+                callback([]);
+            }
+        });
+    } else {
+        callback([]);
+    }
+};
+
 exports.deleteUser = function (username, clientId, callback) {
     var returnVal = {
         success: false,

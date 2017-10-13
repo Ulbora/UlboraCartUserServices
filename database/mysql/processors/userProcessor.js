@@ -120,6 +120,30 @@ exports.getUserList = function (callback) {
     });
 };
 
+
+exports.searchUserList = function (clientId, callback) {
+    var queryId = [clientId];
+    crud.get(userQueries.USER_SEARCH_LIST_QUERY, queryId, function (result) {
+        if (result.success && result.data.length > 0) {
+            var rtnList = [];
+            for (var cnt = 0; cnt < result.data.length; cnt++) {
+                var rtn = {
+                    username: result.data[cnt].username,
+                    clientId: result.data[cnt].client_id,
+                    firstName: result.data[cnt].first_name,
+                    lastName: result.data[cnt].last_name,
+                    enabled: (result.data[0].enabled === 1) ? true : false
+
+                };
+                rtnList.push(rtn);
+            }
+            callback(rtnList);
+        } else {
+            callback(rtnList);
+        }
+    });
+};
+
 exports.deleteUser = function (con, userId, clientId, callback) {
     var queryId = [userId, clientId];
     crud.delete(con, userQueries.USER_DELETE_QUERY, queryId, callback);

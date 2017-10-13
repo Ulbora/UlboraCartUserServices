@@ -83,6 +83,11 @@ exports.getUserList = function (callback) {
     userProcessor.getUserList(callback);
 };
 
+
+exports.searchUserList = function (clientId, callback) {
+    userProcessor.searchUserList(clientId, callback);
+};
+
 exports.deleteUser = function (username, clientId, callback) {
     userProcessor.deleteUser(null, username, clientId, callback);
 };

@@ -169,6 +169,23 @@ describe('UserProcessor', function () {
             }, 1000);
         });
     });
+    
+    
+    describe('#searchUserList()', function () {
+        it('should search user list in processor', function (done) {
+            setTimeout(function () {
+                userProcessor.searchUserList(clientId, function (result) {
+                    console.log("user searched list: " + JSON.stringify(result));
+                    if (result && result.length > 0) {
+                        assert(true);
+                    } else {
+                        assert(false);
+                    }
+                    done();
+                });
+            }, 1000);
+        });
+    });
 
     describe('#deleteUser()', function () {
         it('should delete client', function (done) {

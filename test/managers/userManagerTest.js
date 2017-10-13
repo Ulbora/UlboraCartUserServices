@@ -251,6 +251,24 @@ describe('User Manager', function () {
         });
     });
     
+    
+    
+    describe('#searchUserList()', function () {
+        it('should search user list in manager', function (done) {
+            setTimeout(function () {
+                userManager.searchUserList(clientId, function (result) {
+                    console.log("user searched list: " + JSON.stringify(result));
+                    if (result && result.length > 0) {
+                        assert(true);
+                    } else {
+                        assert(false);
+                    }
+                    done();
+                });
+            }, 1000);
+        });
+    });
+    
     describe('#deleteUser()', function () {
         it('should delete user in manager', function (done) {
             setTimeout(function () {

@@ -35,12 +35,18 @@ exports.init = function(app, db){
     app.get('/rs/role/list', roleService.list);  
     app.delete('/rs/role/delete/:id', roleService.delete);
     
-    //user services
+    //Admin user services
     app.post('/rs/user/add', userService.add);      
     app.put('/rs/user/update', userService.update);
     app.get('/rs/user/get/:username/:clientId', userService.get);
     app.delete('/rs/user/delete/:username/:clientId', userService.delete);
     app.get('/rs/user/list', userService.list);  
-    app.post('/rs/user/login', userService.login);   
+    app.get('/rs/user/search/:clientId', userService.search); 
+    app.post('/rs/user/login', userService.login);  
+    
+    
+    //Client user services --- used by client to add users
+   ////// app.post('/rs/client/user/add', clientUserService.add);     
+    
         
 };
