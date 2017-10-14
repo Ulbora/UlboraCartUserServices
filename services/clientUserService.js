@@ -34,12 +34,15 @@ exports.init = function (database) {
 exports.add = function (req, res) {
     if (req.is('application/json')) {
         var me = {
-            role: "superAdmin",
-            uri: "/rs/user/add",
+            role: "admin",
+            uri: "/rs/client/user/add",
             scope: "write"
         };
         oauth2.authorize(req, res, me, validationUrl, function () {
             var reqBody = req.body;
+            var clientIdStr = req.header("clientId");
+            var clientId = getClientId(clientIdStr);
+            reqBody.clientId = clientId;
             var bodyJson = JSON.stringify(reqBody);
             console.log("body: " + bodyJson);
             userManager.addUser(reqBody, function (result) {
@@ -55,12 +58,15 @@ exports.add = function (req, res) {
 exports.update = function (req, res) {
     if (req.is('application/json')) {
         var me = {
-            role: "superAdmin",
-            uri: "/rs/user/update",
+            role: "admin",
+            uri: "/rs/client/user/update",
             scope: "write"
         };
         oauth2.authorize(req, res, me, validationUrl, function () {
             var reqBody = req.body;
+            var clientIdStr = req.header("clientId");
+            var clientId = getClientId(clientIdStr);
+            reqBody.clientId = clientId;
             var bodyJson = JSON.stringify(reqBody);
             console.log("body: " + bodyJson);
             if (reqBody.password) {
@@ -87,13 +93,14 @@ exports.update = function (req, res) {
 exports.get = function (req, res) {
     console.log("in auth callback");
     var me = {
-        role: "superAdmin",
-        uri: "/rs/user/get",
+        role: "admin",
+        uri: "/rs/client/user/get",
         scope: "read"
     };
     oauth2.authorize(req, res, me, validationUrl, function () {
         var id = req.params.username;
-        var clientId = req.params.clientId;
+        var clientIdStr = req.header("clientId");
+        var clientId = getClientId(clientIdStr);
         if (id !== null && id !== undefined && clientId !== null && clientId !== undefined) {
             userManager.getUser(id, clientId, function (result) {
                 res.send(result);
@@ -104,30 +111,17 @@ exports.get = function (req, res) {
     });
 };
 
-exports.list = function (req, res) {
-    var me = {
-        role: "superAdmin",
-        uri: "/rs/user/list",
-        scope: "read"
-    };
-    oauth2.authorize(req, res, me, validationUrl, function () {
-        console.log("in auth callback");
-        userManager.getUserList(function (result) {
-            res.send(result);
-        });
-    });
-};
-
 
 exports.search = function (req, res) {
     console.log("in auth callback");
     var me = {
-        role: "superAdmin",
-        uri: "/rs/user/search",
+        role: "admin",
+        uri: "/rs/client/user/search",
         scope: "read"
     };
-    oauth2.authorize(req, res, me, validationUrl, function () {       
-        var clientId = req.params.clientId;
+    oauth2.authorize(req, res, me, validationUrl, function () {
+        var clientIdStr = req.header("clientId");
+        var clientId = getClientId(clientIdStr);
         if (clientId !== null && clientId !== undefined) {
             userManager.searchUserList(clientId, function (result) {
                 res.send(result);
@@ -142,13 +136,14 @@ exports.search = function (req, res) {
 exports.delete = function (req, res) {
     console.log("in auth callback");
     var me = {
-        role: "superAdmin",
-        uri: "/rs/user/delete",
+        role: "admin",
+        uri: "/rs/client/user/delete",
         scope: "write"
     };
     oauth2.authorize(req, res, me, validationUrl, function () {
         var id = req.params.username;
-        var clientId = req.params.clientId;
+        var clientIdStr = req.header("clientId");
+        var clientId = getClientId(clientIdStr);
         if (id !== null && id !== undefined && clientId !== null && clientId !== undefined) {
             userManager.deleteUser(id, clientId, function (result) {
                 res.send(result);
@@ -157,24 +152,4 @@ exports.delete = function (req, res) {
             res.send({success: false});
         }
     });
-};
-
-
-exports.login = function (req, res) {
-    if (req.is('application/json')) {
-        var reqBody = req.body;
-        var bodyJson = JSON.stringify(reqBody);
-        console.log("body: " + bodyJson);
-        if (reqBody.username && reqBody.password && reqBody.clientId) {
-            userManager.validateUser(reqBody.username, reqBody.password, reqBody.clientId, function (result) {
-                res.send(result);
-            });
-        } else {
-            res.status(500);
-            res.send({valid: false});
-        }
-    } else {
-        res.status(415);
-        res.send({valid: false});
-    }
 };

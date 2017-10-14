@@ -23,30 +23,35 @@
 
 var roleService = require("../services/roleService");
 var userService = require("../services/userService");
+var clientUserService = require("../services/clientUserService");
 
-exports.init = function(app, db){
+exports.init = function (app, db) {
     //init
     roleService.init(db);
     userService.init(db);
-    
+
     // role validation
     app.post('/rs/role/add', roleService.add);
     app.get('/rs/role/get/:id', roleService.get);
-    app.get('/rs/role/list', roleService.list);  
+    app.get('/rs/role/list', roleService.list);
     app.delete('/rs/role/delete/:id', roleService.delete);
-    
+
     //Admin user services
-    app.post('/rs/user/add', userService.add);      
+    app.post('/rs/user/add', userService.add);
     app.put('/rs/user/update', userService.update);
     app.get('/rs/user/get/:username/:clientId', userService.get);
     app.delete('/rs/user/delete/:username/:clientId', userService.delete);
-    app.get('/rs/user/list', userService.list);  
-    app.get('/rs/user/search/:clientId', userService.search); 
-    app.post('/rs/user/login', userService.login);  
-    
-    
+    app.get('/rs/user/list', userService.list);
+    app.get('/rs/user/search/:clientId', userService.search);
+    app.post('/rs/user/login', userService.login);
+
+
     //Client user services --- used by client to add users
-   ////// app.post('/rs/client/user/add', clientUserService.add);     
-    
-        
+    app.post('/rs/client/user/add', clientUserService.add);
+    app.put('/rs/client/user/update', clientUserService.update);
+    app.get('/rs/client/user/get/:username', clientUserService.get);
+    app.delete('/rs/client/user/delete/:username', clientUserService.delete);
+    app.get('/rs/client/user/search', clientUserService.search);
+
+
 };

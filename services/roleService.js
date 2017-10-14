@@ -34,7 +34,7 @@ exports.init = function (database) {
 exports.add = function (req, res) {
     if (req.is('application/json')) {
         var me = {
-            role: "admin",
+            role: "superAdmin",
             uri: "/rs/role/add",
             scope: "write"
         };
@@ -56,7 +56,7 @@ exports.add = function (req, res) {
 exports.get = function (req, res) {
     console.log("in auth callback");
     var me = {
-        role: "admin",
+        role: "superAdmin",
         uri: "/rs/role/get",
         scope: "read"
     };
@@ -74,7 +74,7 @@ exports.get = function (req, res) {
 
 exports.list = function (req, res) {
     var me = {
-        role: "admin",
+        role: "superAdmin",
         uri: "/rs/role/list",
         scope: "read"
     };
@@ -89,7 +89,7 @@ exports.list = function (req, res) {
 exports.delete = function (req, res) {
     console.log("in auth callback");
     var me = {
-        role: "admin",
+        role: "superAdmin",
         uri: "/rs/role/delete",
         scope: "write"
     };
