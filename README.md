@@ -201,6 +201,7 @@ Example Request
    "emailAddress":"bob@bob.com",
    "firstName":"bob",
    "lastName":"williams",
+   "roleId": 1,
    "clientId":"5"   
 }
   

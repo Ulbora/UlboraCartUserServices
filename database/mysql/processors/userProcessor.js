@@ -69,6 +69,7 @@ exports.updateUserInfo = function (con, json, callback) {
         json.firstName,
         json.lastName,
         json.emailAddress,
+        json.roleId,
         json.username,
         json.clientId
     ];
@@ -132,7 +133,7 @@ exports.searchUserList = function (clientId, callback) {
                     clientId: result.data[cnt].client_id,
                     firstName: result.data[cnt].first_name,
                     lastName: result.data[cnt].last_name,
-                    enabled: (result.data[0].enabled === 1) ? true : false
+                    enabled: (result.data[cnt].enabled === 1) ? true : false
 
                 };
                 rtnList.push(rtn);

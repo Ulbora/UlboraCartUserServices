@@ -74,7 +74,7 @@ exports.get = function (req, res) {
 
 exports.list = function (req, res) {
     var me = {
-        role: "superAdmin",
+        role: "admin",
         uri: "/rs/role/list",
         scope: "read"
     };

@@ -28,7 +28,7 @@ exports.USER_PASSWORD_UPDATE_QUERY = "UPDATE user SET password = ? " +
 exports.USER_ENABLE_UPDATE_QUERY = "UPDATE user SET enabled = ? " +
         "WHERE username = ? and client_id = ? ";
 
-exports.USER_INFO_UPDATE_QUERY = "UPDATE user SET first_name = ?, last_name = ?, email_address = ? " +
+exports.USER_INFO_UPDATE_QUERY = "UPDATE user SET first_name = ?, last_name = ?, email_address = ?, role_id = ? " +
         "WHERE username = ? and client_id = ? ";
 
 exports.USER_GET_BY_USERNAME_QUERY = "SELECT * FROM user WHERE username = ? and client_id = ? ";

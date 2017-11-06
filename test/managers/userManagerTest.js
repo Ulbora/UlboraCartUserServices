@@ -148,6 +148,7 @@ describe('User Manager', function () {
                 firstName: "robert",
                 lastName: "sims",
                 emailAddress: "sims@sims.com",
+                roleId: roleId,
                 username: userId,
                 clientId: clientId
             };
