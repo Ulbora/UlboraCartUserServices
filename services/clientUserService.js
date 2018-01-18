@@ -43,8 +43,8 @@ exports.add = function (req, res) {
             var clientIdStr = req.header("clientId");
             var clientId = getClientId(clientIdStr);
             reqBody.clientId = clientId;
-            var bodyJson = JSON.stringify(reqBody);
-            console.log("body: " + bodyJson);
+            //var bodyJson = JSON.stringify(reqBody);
+           // console.log("body: " + bodyJson);
             userManager.addUser(reqBody, function (result) {
                 res.send(result);
             });
@@ -67,8 +67,8 @@ exports.update = function (req, res) {
             var clientIdStr = req.header("clientId");
             var clientId = getClientId(clientIdStr);
             reqBody.clientId = clientId;
-            var bodyJson = JSON.stringify(reqBody);
-            console.log("body: " + bodyJson);
+            //var bodyJson = JSON.stringify(reqBody);
+            //console.log("body: " + bodyJson);
             if (reqBody.password) {
                 userManager.updateUserPassword(reqBody, function (result) {
                     res.send(result);

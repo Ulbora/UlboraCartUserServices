@@ -63,7 +63,7 @@ exports.insert = function (con, query, args, callback) {
         c = pool;
     }
     c.query(query, args, function (err, result) {
-        console.log("result in mysqlCrud: " + JSON.stringify(result));
+        //console.log("result in mysqlCrud: " + JSON.stringify(result));
         if (!err && result.insertId) {
             rtn.id = result.insertId;
             rtn.success = true;
@@ -88,7 +88,7 @@ exports.insertNoId = function (con, query, args, callback) {
         c = pool;
     }
     c.query(query, args, function (err, result) {
-        console.log("result in mysqlCrud: " + JSON.stringify(result));
+        //console.log("result in mysqlCrud: " + JSON.stringify(result));
         if (!err) {
             rtn.success = true;
             callback(rtn);
@@ -108,7 +108,7 @@ exports.get = function (query, args, callback) {
     };
     pool.query(query, args, function (err, result) {
         if (!err && result) {
-            console.log("found data: " + JSON.stringify(result));
+            //console.log("found data: " + JSON.stringify(result));
             rtn.success = true;
             rtn.data = result;
             callback(rtn);
@@ -128,7 +128,7 @@ exports.getList = function (query, callback) {
     };
     pool.query(query, function (err, result) {
         if (!err && result) {
-            console.log("found data list: " + JSON.stringify(result));
+            //console.log("found data list: " + JSON.stringify(result));
             rtn.success = true;
             rtn.data = result;
             callback(rtn);
@@ -175,11 +175,11 @@ exports.delete = function (con, query, args, callback) {
     } else {
         c = pool;
     }
-    console.log("deleted rows: " + query);
-    console.log("deleted rows args: " + JSON.stringify(args));
+    //console.log("deleted rows: " + query);
+    //console.log("deleted rows args: " + JSON.stringify(args));
     c.query(query, args, function (err, result) {
         if (!err && result) {
-            console.log("deleted rows: " + JSON.stringify(result));
+            //console.log("deleted rows: " + JSON.stringify(result));
             rtn.success = true;
             callback(rtn);
         } else {

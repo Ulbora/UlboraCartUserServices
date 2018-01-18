@@ -40,8 +40,8 @@ exports.add = function (req, res) {
         };
         oauth2.authorize(req, res, me, validationUrl, function () {
             var reqBody = req.body;
-            var bodyJson = JSON.stringify(reqBody);
-            console.log("body: " + bodyJson);
+            //var bodyJson = JSON.stringify(reqBody);
+            //console.log("body: " + bodyJson);
             userManager.addUser(reqBody, function (result) {
                 res.send(result);
             });
@@ -61,8 +61,8 @@ exports.update = function (req, res) {
         };
         oauth2.authorize(req, res, me, validationUrl, function () {
             var reqBody = req.body;
-            var bodyJson = JSON.stringify(reqBody);
-            console.log("body: " + bodyJson);
+            //var bodyJson = JSON.stringify(reqBody);
+            //console.log("body: " + bodyJson);
             if (reqBody.password) {
                 userManager.updateUserPassword(reqBody, function (result) {
                     res.send(result);
@@ -111,7 +111,7 @@ exports.list = function (req, res) {
         scope: "read"
     };
     oauth2.authorize(req, res, me, validationUrl, function () {
-        console.log("in auth callback");
+        //console.log("in auth callback");
         userManager.getUserList(function (result) {
             res.send(result);
         });
@@ -163,8 +163,8 @@ exports.delete = function (req, res) {
 exports.login = function (req, res) {
     if (req.is('application/json')) {
         var reqBody = req.body;
-        var bodyJson = JSON.stringify(reqBody);
-        console.log("body: " + bodyJson);
+        //var bodyJson = JSON.stringify(reqBody);
+        //console.log("body: " + bodyJson);
         if (reqBody.username && reqBody.password && reqBody.clientId) {
             userManager.validateUser(reqBody.username, reqBody.password, reqBody.clientId, function (result) {
                 res.send(result);

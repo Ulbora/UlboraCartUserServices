@@ -40,8 +40,8 @@ exports.add = function (req, res) {
         };
         oauth2.authorize(req, res, me, validationUrl, function () {
             var reqBody = req.body;
-            var bodyJson = JSON.stringify(reqBody);
-            console.log("body: " + bodyJson);
+            //var bodyJson = JSON.stringify(reqBody);
+            //console.log("body: " + bodyJson);
             roleManager.addRole(reqBody, function (result) {
                 res.send(result);
             });
@@ -79,7 +79,7 @@ exports.list = function (req, res) {
         scope: "read"
     };
     oauth2.authorize(req, res, me, validationUrl, function () {
-        console.log("in auth callback");
+        //console.log("in auth callback");
         roleManager.getRoleList(function (result) {
             res.send(result);
         });

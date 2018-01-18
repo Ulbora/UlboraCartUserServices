@@ -38,7 +38,7 @@ exports.addUser = function (json, callback) {
         if (json.username && json.password) {
             manager.hashPassword(json.username, json.password, function (err, key) {
                 if (!err && key) {
-                    console.log("password hash : " + key.toString('base64'));
+                    //console.log("password hash : " + key.toString('base64'));
                     json.password = key.toString('base64');
                     var d = new Date();
                     json.dateEntered = d;
@@ -74,7 +74,7 @@ exports.updateUserPassword = function (json, callback) {
         if (json.username && json.password) {
             manager.hashPassword(json.username, json.password, function (err, key) {
                 if (!err && key) {
-                    console.log("password hash : " + key.toString('base64'));
+                    //console.log("password hash : " + key.toString('base64'));
                     json.password = key.toString('base64');
                     db.updateUserPassword(json, function (result) {
                         if (result && result.success) {
@@ -205,13 +205,13 @@ exports.validateUser = function (username, password, clientId, callback) {
     if (isOk && isOk2) {
         if (username && password) {
             db.getUser(username, clientId, function (result) {
-                console.log("user to validate: " + JSON.stringify(result));
+                //console.log("user to validate: " + JSON.stringify(result));
                 if (result) {
                     manager.hashPassword(username, password, function (err, key) {
                         if (!err && key) {
                             var encpw = key.toString('base64');
-                            console.log("pw to validate: " + encpw);
-                            console.log("pw for user: " + result.password);
+                            //console.log("pw to validate: " + encpw);
+                            //console.log("pw for user: " + result.password);
                             if(encpw === result.password && result.enabled){
                                 rtn.valid = true;
                                 rtn.code = result.clientId;
