@@ -50,5 +50,6 @@ exports.securityCheck = function (obj) {
 
 
 exports.hashPassword = function (username, pw, callback) {
-    crypto.pbkdf2(pw, username, 250, 128, callback);
+    //crypto.pbkdf2(pw, username, 250, 128, 'sha1', callback);
+    crypto.pbkdf2(pw, username, 100000, 512, 'sha512', callback);
 };

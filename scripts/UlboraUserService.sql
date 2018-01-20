@@ -34,7 +34,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ulbora_user_service`.`user` (
   `username` VARCHAR(100) NOT NULL,
-  `password` VARCHAR(500) NOT NULL,
+  `password` VARCHAR(1000) NOT NULL,
   `enabled` TINYINT(1) NOT NULL,
   `date_entered` DATE NOT NULL,
   `email_address` VARCHAR(100) NOT NULL,
